@@ -17,19 +17,40 @@ This project continues development independently from [Sacracia/RepoHax](https:/
 
 ---
 
-### O que mudou desde o RepoHax para REPO v0.4.4.3
+### Changes since upstream RepoHax for REPO v0.4.4.3
 
-A referência é o [RepoHax v1.3.3 para REPO v0.4.4.3](https://github.com/Sacracia/RepoHax/releases/tag/v1.3.3). Esta continuação acrescenta os recursos abaixo; algumas ações continuam limitadas ao host.
+Reference: [RepoHax v1.3.3 for REPO v0.4.4.3](https://github.com/Sacracia/RepoHax/releases/tag/v1.3.3). This continuation adds the features below. Some actions remain host-only.
 
-- **Grab:** Grab Assist com raio configurável, Grab Through, WallGrab, Anti Music Box Spin e Anti Duck. O Anti Duck tenta bloquear grabs acidentais, mas não reconhece todos os colliders.
-- **Identity:** aplicar nome personalizado, gerar nome aleatório em português, criar avatar aleatório e redefinir a identidade.
-- **Manage Enemies:** selecionar inimigos vivos e usar Kill, Bring, Heal, Set 1 HP, AI Disable/Enable e Aggro Monster. No multiplayer, a disponibilidade e o alvo dependem de ser host ou cliente.
-- **Items e Valuables:** inventário na loja, lista de itens do chão que podem ser guardados, spawner de valuables e dinheiro com valor configurável, além do filtro para ocultar valuables já colocados no carrinho ou na extração.
-- **Runtime:** status e nível/mapa atuais, contagem de valuables e itens no chão, inimigos por tier, vida dos jogadores, valores no carrinho/extração/mapa e bateria do caminhão.
-- **Performance:** opções para reduzir sombras, antialiasing, luzes de pixel, fog, partículas suaves, vegetação, reflexos e pós-processamento; contador de FPS e captura de benchmark para arquivos CSV.
-- **Settings e interface:** português, restauração das configurações, opção para ocultar controles exclusivos do host, taxa do ESP configurável e atualização sincronizada por frames; abas e painéis com rolagem.
+**Grab**
+- Grab Assist with an adjustable center radius, Grab Through, and WallGrab
+- Anti Music Box Spin
+- Anti Duck, which attempts to prevent accidental grabs but may not detect every collider
 
-A [release 0.4.5.3](https://github.com/JuninSB/SACRACIA-re-CONTINUED/releases/tag/v0.4.5.3) inclui o binário correspondente a esta versão.
+**Identity**
+- Apply a custom name, generate a random Portuguese name, randomize the avatar, or reset the identity
+
+**Enemies**
+- Manage a selected living enemy with Kill, Bring, Heal, Set 1 HP, and AI Disable/Enable
+- Aggro Monster, with target behavior depending on whether the player is host or client
+
+**Items and Valuables**
+- Shop inventory and a list of dropped items that can be stored
+- Spawn valuables and money with a custom value
+- Hide valuables already placed in the cart or extraction point
+
+**Runtime**
+- Show the current status and level, valuables and dropped item counts, monsters by tier, player health, cart/extraction/map values, and truck battery
+
+**Performance**
+- Options for shadows, antialiasing, pixel lights, fog, soft particles, soft vegetation, reflection probes, and post-processing
+- FPS counter and benchmark capture to CSV files
+
+**Settings and Interface**
+- Portuguese language, Restore Settings, and an option to hide host-only controls
+- Configurable ESP update rate and frame-matched updates
+- Scrollable tabs and panels
+
+The [0.4.5.3 release](https://github.com/JuninSB/SACRACIA-re-CONTINUED/releases/tag/v0.4.5.3) includes the matching binary.
 
 ---
 ### Features
