@@ -80,7 +80,6 @@ namespace Cheat
         bool                                UnlimGrabRange;
         bool                                GrabThrough;
         bool                                GrabAssist;
-        bool                                WallGrab;
         bool                                AntiMusicBoxSpin = false;
         bool                                AntiDuck = false;
         int                                 GrabAssistRadius = 64;

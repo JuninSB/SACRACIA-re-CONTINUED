@@ -266,10 +266,8 @@ namespace Cheat
         Hax::Gui::BeginVertical(spacing);
         Hax::Gui::Dummy({0.f, 0.f});
         BeginPanel(LINE_ID + 7001);
-        PanelHeader(G->Loc[LocKey_WallGrab]);
+        PanelHeader(G->Loc[LocKey_GRAB]);
         ToggleEx(LINE_ID + 7001, G->GrabThrough, G->Loc[LocKey_GrabThrough]);
-        HorizontalLine(1_px);
-        ToggleEx(LINE_ID + 7001, G->WallGrab, G->Loc[LocKey_WallGrab]);
         HorizontalLine(1_px);
         ToggleEx(LINE_ID + 7001, G->UnlimGrabRange, G->Loc[LocKey_UnlimitedRange]);
         HorizontalLine(1_px);

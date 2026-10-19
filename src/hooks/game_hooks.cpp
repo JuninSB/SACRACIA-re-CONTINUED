@@ -113,100 +113,6 @@ namespace Cheat
             WritePrivateProfileStringW(L"User", L"Name", name, selected.c_str());
     }
 
-    static void UpdateWallGrabVisuals()
-    {
-        struct HiddenRenderer { Unity::Renderer Renderer; bool WasEnabled; };
-        static std::vector<HiddenRenderer> hidden;
-        static ULONGLONG nextScan = 0;
-        const bool active = G->WallGrab && (GetAsyncKeyState(VK_CAPITAL) & 0x8000) && IsInGame();
-
-        if (!active)
-        {
-            for (HiddenRenderer& entry : hidden)
-                if (entry.Renderer)
-                    entry.Renderer.SetEnabled(entry.WasEnabled);
-            hidden.clear();
-            nextScan = 0;
-            return;
-        }
-
-        const ULONGLONG now = GetTickCount64();
-        if (now < nextScan)
-            return;
-        nextScan = now + 100;
-
-        Unity::Camera camera = SemiFunc::MainCamera();
-        if (!camera)
-            return;
-
-        const int obstructionMask = SemiFunc::LayerMaskGetVisionObstruct();
-        const Unity::Vector3 origin = camera.GetTransform().GetPosition();
-        const Unity::Vector3 direction = camera.GetTransform().GetForward();
-        std::vector<Unity::Renderer> scanned;
-        for (Unity::RaycastHit hit : Unity::Physics::SphereCastAll(origin, 0.18f, direction, 200.f, obstructionMask))
-        {
-            if (hit.m_Normal.Y > 0.65f)
-                continue;
-            Unity::Transform transform = hit.GetTransform();
-            bool isGrabbable = false;
-            Unity::Transform node = transform;
-            for (int depth = 0; node && depth < 12; ++depth, node = node.GetParent())
-            {
-                Unity::GameObject object = node.GetGameObject();
-                if (object.GetComponent<PhysGrabObject>() || object.GetComponent<ValuableObject>() || object.GetComponent<ItemToggle>())
-                {
-                    isGrabbable = true;
-                    break;
-                }
-            }
-            if (isGrabbable)
-                continue;
-
-            for (node = transform; node; node = node.GetParent())
-            {
-                Unity::Renderer ownRenderer = node.GetGameObject().GetComponent<Unity::Renderer>();
-                if (!ownRenderer)
-                    continue;
-                for (Unity::Renderer renderer : node.GetComponentsInChildren<Unity::Renderer>(true))
-                {
-                    if (!renderer) continue;
-                    bool found = false;
-                    for (Unity::Renderer seen : scanned)
-                        if (seen == renderer) { found = true; break; }
-                    if (!found) scanned.push_back(renderer);
-                }
-                break;
-            }
-        }
-
-        for (size_t i = hidden.size(); i-- > 0;)
-        {
-            bool stillVisible = false;
-            for (Unity::Renderer renderer : scanned)
-                if (renderer == hidden[i].Renderer) { stillVisible = true; break; }
-            if (!stillVisible)
-            {
-                if (hidden[i].Renderer)
-                    hidden[i].Renderer.SetEnabled(hidden[i].WasEnabled);
-                hidden.erase(hidden.begin() + i);
-            }
-        }
-
-        for (Unity::Renderer renderer : scanned)
-        {
-            bool alreadyHidden = false;
-            for (HiddenRenderer& entry : hidden)
-                if (entry.Renderer == renderer) { alreadyHidden = true; break; }
-            if (!alreadyHidden)
-            {
-                const bool wasEnabled = renderer.GetEnabled();
-                hidden.push_back({renderer, wasEnabled});
-                if (wasEnabled)
-                    renderer.SetEnabled(false);
-            }
-        }
-    }
-
     static void UpdatePerformanceSettings()
     {
         if (!G->IsInGame)
@@ -455,7 +361,6 @@ namespace Cheat
                 lastIsClient = G->IsClient;
             }
             UpdateRuntimeSnapshot();
-            UpdateWallGrabVisuals();
             UpdatePerformanceSettings();
 
             if (G->LoadIdentityName)
@@ -1065,25 +970,51 @@ namespace Cheat
 
     static void Hooked__InventorySpot_Update(InventorySpot __this)
     {
-        if (G->ShopInventory && G->IsInGame && G->IsInShop && __this && !__this.IsOccupied())
+        G->InventorySpot_Update_Hook.unsafe_call<void, InventorySpot>(__this);
+
+        static bool keyWasDown[3]{};
+        if (!G->ShopInventory || !G->IsInGame || !G->IsInShop)
         {
-            const int index = __this.inventorySpotIndex();
-            const int keys[] = {19, 20, 21};
-            if (index >= 0 && index < 3 && SemiFunc::InputDown(keys[index]))
-            {
-                PhysGrabber grabber = PhysGrabber::instance();
-                PhysGrabObject held = grabber && grabber.grabbed() ? grabber.grabbedPhysGrabObject() : nullptr;
-                ItemAttributes attributes = held ? held.GetComponent<ItemAttributes>() : nullptr;
-                ItemEquippable equippable = attributes ? attributes.GetComponent<ItemEquippable>() : nullptr;
-                if (equippable && !equippable.IsEquipped())
-                {
-                    equippable.RequestEquip(index, SemiFunc::PhotonViewIDPlayerAvatarLocal());
-                    Hax::Log(G->Logger, L"Shop inventory: requested normal equip into slot %d", index + 1);
-                }
-            }
+            keyWasDown[0] = keyWasDown[1] = keyWasDown[2] = false;
+            return;
+        }
+        if (!__this)
+            return;
+
+        const int index = __this.inventorySpotIndex();
+        if (index < 0 || index >= 3)
+            return;
+
+        // Read the physical number key directly. The game's InputDown helper is
+        // consumed by the shop UI on some paths, so InventorySpot never sees it.
+        const bool keyDown = (GetAsyncKeyState('1' + index) & 0x8000) != 0;
+        const bool justPressed = keyDown && !keyWasDown[index];
+        keyWasDown[index] = keyDown;
+        if (!justPressed || __this.IsOccupied())
+            return;
+
+        PlayerAvatar avatar = PlayerAvatar::instance();
+        PhysGrabber grabber = avatar ? avatar.physGrabber() : nullptr;
+        PhysGrabObject held = grabber && grabber.grabbed() ? grabber.grabbedPhysGrabObject() : nullptr;
+        ItemEquippable equippable = held ? held.GetComponent<ItemEquippable>() : nullptr;
+        if (!equippable && held)
+            equippable = held.GetComponentInChildren<ItemEquippable>();
+        for (Unity::Transform node = held ? held.GetTransform().GetParent() : nullptr;
+            !equippable && node; node = node.GetParent())
+        {
+            equippable = node.GetComponent<ItemEquippable>();
+            if (!equippable)
+                equippable = node.GetComponentInChildren<ItemEquippable>();
         }
 
-        G->InventorySpot_Update_Hook.unsafe_call<void, InventorySpot>(__this);
+        if (!equippable || equippable.IsEquipped())
+        {
+            Hax::LogDebug(G->Logger, L"Shop inventory: key %d pressed but no unequipped held item was found", index + 1);
+            return;
+        }
+
+        equippable.RequestEquip(index, SemiFunc::PhotonViewIDPlayerAvatarLocal());
+        Hax::Log(G->Logger, L"Shop inventory: requested normal equip into slot %d", index + 1);
     }
 
     static void Hooked__SemiUI_Hide(SemiUI __this)
@@ -1152,6 +1083,17 @@ namespace Cheat
         if (b) { ::QueryPerformanceCounter(&e); BenchmarkRecordSection(6, (unsigned long long)(e.QuadPart - s.QuadPart)); }
     }
 
+    static Unity::Transform g_ThirdPersonCameraTransform = nullptr;
+    static Unity::Vector3 g_ThirdPersonCameraOriginalPosition{};
+    static bool g_ThirdPersonCameraOffsetApplied = false;
+
+    static void RestoreThirdPersonCamera()
+    {
+        if (g_ThirdPersonCameraOffsetApplied && g_ThirdPersonCameraTransform)
+            g_ThirdPersonCameraTransform.SetLocalPosition(g_ThirdPersonCameraOriginalPosition);
+        g_ThirdPersonCameraOffsetApplied = false;
+    }
+
     static void SetThirdPerson()
     {
         static String playerTag = null;
@@ -1160,6 +1102,15 @@ namespace Cheat
             playerTag = System::String::New("Player");
             GCHandle::Alloc(playerTag, true);
         }
+
+        Unity::Camera camera = SemiFunc::MainCamera();
+        if (!camera)
+            return;
+        RestoreThirdPersonCamera();
+        g_ThirdPersonCameraTransform = camera.GetTransform();
+        if (!g_ThirdPersonCameraTransform)
+            return;
+        g_ThirdPersonCameraOriginalPosition = g_ThirdPersonCameraTransform.GetLocalPosition();
 
         PlayerAvatar avatar = PlayerAvatar::instance();
 
@@ -1180,7 +1131,8 @@ namespace Cheat
         else if (isMapOpen)
             dist = 1.f;
 
-        SemiFunc::MainCamera().GetTransform().SetLocalPosition(Unity::Vector3(0.f, 0.f, -dist));
+        g_ThirdPersonCameraTransform.SetLocalPosition(g_ThirdPersonCameraOriginalPosition + Unity::Vector3(0.f, 0.f, -dist));
+        g_ThirdPersonCameraOffsetApplied = true;
     }
 
     static bool ShouldDrawEsp()
@@ -1229,7 +1181,9 @@ namespace Cheat
                 if (prevFov < (float)G->Fov)
                     mainCam.SetFieldOfView((float)G->Fov);
 
-                if (G->ThirdPerson && !SpectateCamera::instance())
+                if (!G->ThirdPerson || SpectateCamera::instance())
+                    RestoreThirdPersonCamera();
+                else
                     SetThirdPerson();
 
                 const ULONGLONG now = GetTickCount64();
@@ -1376,6 +1330,7 @@ namespace Cheat
         if (bench) ::QueryPerformanceCounter(&benchStart);
         try
         {
+            RestoreThirdPersonCamera();
             Unity::Camera mainCam = SemiFunc::MainCamera();
             if (mainCam && G->IsInGame)
             {
@@ -1384,8 +1339,6 @@ namespace Cheat
 
                 mainCam.SetFieldOfView(prevFov);
 
-                if (G->ThirdPerson && !SpectateCamera::instance())
-                    mainCam.GetTransform().SetLocalPosition(Unity::Vector3::zero());
             }
         }
         catch (System::Exception& ex)
@@ -1501,7 +1454,8 @@ namespace Cheat
     {
         for (int depth = 0; transform && depth < 8; ++depth)
         {
-            if (transform.GetComponent<EnemyDuck>())
+            // Duck colliders can be children of the object that owns EnemyDuck.
+            if (transform.GetComponent<EnemyDuck>() || transform.GetComponentInChildren<EnemyDuck>())
                 return true;
             transform = transform.GetParent();
         }
@@ -1520,6 +1474,8 @@ namespace Cheat
         PlayerAvatar playerAvatar = PlayerAvatar::instance();
 
         const bool isLocalGrabber = playerAvatar && __this == playerAvatar.physGrabber();
+        if (isLocalGrabber && G->AntiDuck && grab && IsDuckGrabObject(__this.currentlyLookingAtPhysGrabObject()))
+            grab = false;
         if (isLocalGrabber)
         {
             g_GrabAssistCandidate = nullptr;
@@ -1532,19 +1488,18 @@ namespace Cheat
                 g_NextAssistScan = 0;
             }
         }
-        const bool wallKeyHeld = (GetAsyncKeyState(VK_CAPITAL) & 0x8000) != 0;
         if (isLocalGrabber && G->UnlimGrabRange)
         {
             range = 999999.f;
             g_RaycastMaxDist = true;
         }
 
-        if (isLocalGrabber && !G->UnlimGrabRange && (G->GrabThrough || (G->WallGrab && wallKeyHeld)))
+        if (isLocalGrabber && !G->UnlimGrabRange && G->GrabThrough)
             range = cached + 5.f;
 
         g_InGrabRayCheck = isLocalGrabber;
         g_GrabAssistScanEnabled = isLocalGrabber && grab;
-        g_IgnoreGrabObstructions = isLocalGrabber && (G->GrabThrough || (G->WallGrab && wallKeyHeld));
+        g_IgnoreGrabObstructions = isLocalGrabber && G->GrabThrough;
 
         G->PhysGrabber_RayCheck_Hook.unsafe_call<void, PhysGrabber, bool>(__this, grab);
 

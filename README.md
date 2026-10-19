@@ -22,7 +22,7 @@ This project continues development independently from [Sacracia/RepoHax](https:/
 Reference: [RepoHax v1.3.3 for REPO v0.4.4.3](https://github.com/Sacracia/RepoHax/releases/tag/v1.3.3). This continuation adds the features below. Some actions remain host-only.
 
 **Grab**
-- Grab Assist with an adjustable center radius, Grab Through, and WallGrab
+- Grab Assist with an adjustable center radius and Grab Through
 - Anti Music Box Spin
 - Anti Duck, which attempts to prevent accidental grabs but may not detect every collider
 
@@ -50,7 +50,9 @@ Reference: [RepoHax v1.3.3 for REPO v0.4.4.3](https://github.com/Sacracia/RepoHa
 - Configurable ESP update rate and frame-matched updates
 - Scrollable tabs and panels
 
-The [0.4.5.3 release](https://github.com/JuninSB/SACRACIA-re-CONTINUED/releases/tag/v0.4.5.3) includes the matching binary.
+**Patch 0.4.5.4** fixes restoring the normal camera after Third person, strengthens Anti Duck checks, removes WallGrab while keeping Grab Through, and improves putting held items into the shop inventory.
+
+The [0.4.5.4 release](https://github.com/JuninSB/SACRACIA-re-CONTINUED/releases/tag/v0.4.5.4) includes the matching binary.
 
 ---
 ### Features

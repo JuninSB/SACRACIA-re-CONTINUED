@@ -715,7 +715,7 @@ namespace Cheat
         Hax::Log(G->Logger, L"Restore Settings requested; inGame=%d client=%d shop=%d", G->IsInGame, G->IsClient, G->IsInShop);
         G->UseConsole = false; G->DarkenBackground = false; G->HideHostOnlyOptions = false; G->EspMatchFrameRate = false; G->EspUpdateRate = 10; G->EspFrameInterval = 1; G->Language = Lang_Eng; G->VkOpenClose = VK_OEM_3;
         G->Godmode = G->InfStamina = G->InfJumps = G->NoTumble = G->EasyGrab = G->UnlimGrabRange = false;
-        G->GrabThrough = G->GrabAssist = G->WallGrab = false; G->AntiMusicBoxSpin = G->AntiDuck = false; G->GrabAssistRadius = 64;
+        G->GrabThrough = G->GrabAssist = false; G->AntiMusicBoxSpin = G->AntiDuck = false; G->GrabAssistRadius = 64;
         G->PerfDisableShadows = G->PerfDisableAntiAliasing = G->PerfDisablePixelLights = G->PerfDisableLodBias = true;
         G->PerfDisableFog = false;
         G->PerfDisableSoftParticles = G->PerfDisableSoftVegetation = G->PerfDisableReflectionProbes = G->PerfDisablePostProcessing = true;
@@ -771,7 +771,7 @@ namespace Cheat
         else
             Hax::InitLogFile(G->Logger, L"haxsdk_logs.txt", G->UseConsole);
         ::SetUnhandledExceptionFilter(RepoHaxCrashHandler);
-        Hax::Log(G->Logger, L"RepoHax diagnostics started; version 0.4.5.3 [RELEASE]");
+        Hax::Log(G->Logger, L"RepoHax diagnostics started; version 0.4.5.4 [PATCH]");
         wchar_t steamRelaunched[8]{};
         if (::GetEnvironmentVariableW(L"REPOHAX_STEAM_RELAUNCHED", steamRelaunched, _countof(steamRelaunched)))
         {
@@ -849,7 +849,6 @@ namespace Cheat
         Hax::IniAddEntry(ini, "Stats",      "UnlimitedGrabRange",  &G->UnlimGrabRange,      Hax::IniFileWrite_Bool, Hax::IniFileRead_Bool);
         Hax::IniAddEntry(ini, "Grab",       "GrabThrough",         &G->GrabThrough,         Hax::IniFileWrite_Bool, Hax::IniFileRead_Bool);
         Hax::IniAddEntry(ini, "Grab",       "GrabAssist",          &G->GrabAssist,          Hax::IniFileWrite_Bool, Hax::IniFileRead_Bool);
-        Hax::IniAddEntry(ini, "Grab",       "WallGrab",            &G->WallGrab,            Hax::IniFileWrite_Bool, Hax::IniFileRead_Bool);
         Hax::IniAddEntry(ini, "Grab",       "AntiMusicBoxSpin",    &G->AntiMusicBoxSpin,    Hax::IniFileWrite_Bool, Hax::IniFileRead_Bool);
         Hax::IniAddEntry(ini, "Grab",       "AntiDuck",            &G->AntiDuck,            Hax::IniFileWrite_Bool, Hax::IniFileRead_Bool);
         Hax::IniAddEntry(ini, "Grab",       "GrabAssistRadius",    &G->GrabAssistRadius,    Hax::IniFileWrite_Int,  IniFileRead_IntClamped<64, 25, 600>);

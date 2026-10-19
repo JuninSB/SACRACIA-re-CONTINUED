@@ -82,7 +82,7 @@ namespace Cheat
                 DescLabel(IsBenchmarkCaptureEnabled() ? L"Recording frame phases and managed Update methods. See Benchmark_Methods_*.csv beside the main CSV. Scene counts are sampled every 5 seconds." : L"Captures frame phases, managed Update methods, CPU/memory and low-rate scene counts. See docs/update-performance.md for limits.");
                 HorizontalLine(1_px);
                 MainLabel(G->Loc[LocKey_Version]);
-                DescLabel(L"RepoHax 0.4.5.3 [RELEASE]");
+                DescLabel(L"RepoHax 0.4.5.4 [PATCH]");
                 HorizontalLine(1_px);
                 if (Button(HAX_LINE, G->Loc[LocKey_RestoreSettings], {}, {.MinW = Hax::Gui::GetContentRegionAvail().X}))
                     RestoreSettings();

@@ -130,7 +130,6 @@ X(LocKey_AntiMusicBoxSpin, L"Anti Music Box Spin", L"Отключить вращ
 X(LocKey_AntiMusicBoxSpinHint, L"Stops the Music Box from steering your camera while it plays.", L"Не позволяет музыкальной шкатулке вращать камеру во время игры.") \
 X(LocKey_AntiDuck, L"Anti Duck", L"Защита от утки") \
 X(LocKey_AntiDuckHint, L"Best effort: tries to block accidental grabs of the Duck; some colliders may not be detected.", L"Пытается блокировать случайный захват утки; некоторые коллайдеры могут не распознаться.") \
-X(LocKey_WallGrab, L"WallGrab", L"Захват сквозь стены") \
 X(LocKey_IdentityName, L"Name", L"Имя") \
 X(LocKey_Apply, L"Apply", L"Применить") \
 X(LocKey_RandomName, L"Random Name", L"Случайное имя") \
@@ -308,7 +307,6 @@ X(LocKey_AntiMusicBoxSpin, L"Anti Music Box Spin") \
 X(LocKey_AntiMusicBoxSpinHint, L"Impede a Music Box de girar sua c\u00e2mera enquanto toca.") \
 X(LocKey_AntiDuck, L"Anti Duck") \
 X(LocKey_AntiDuckHint, L"Tenta bloquear grabs acidentais no pato; alguns colliders podem n\u00e3o ser detectados.") \
-X(LocKey_WallGrab, L"Grab atrav\u00e9s de paredes") \
 X(LocKey_IdentityName, L"Nome") \
 X(LocKey_Apply, L"Aplicar") \
 X(LocKey_RandomName, L"Nome aleat\u00f3rio") \
