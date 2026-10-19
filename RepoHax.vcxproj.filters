@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\dllmain.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\haxsdk\gui\hax_gui.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\haxsdk\gui\hax_gui_dx11.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\haxsdk\hax.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\safetyhook\safetyhook.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\safetyhook\Zydis.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cheat.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pch.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\overlay\menu\tabs\stats_tab.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\overlay\menu\tabs\performance_tab.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\overlay\menu\tabs\runtime_tab.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hooks\game_hooks.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hooks\win_hooks.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hooks\graphics_hooks.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\overlay\menu\menu.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\overlay\esp\esp.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\overlay\menu\widgets.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\overlay\menu\tabs\entities_tab.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\overlay\menu\tabs\vision_tab.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\overlay\menu\tabs\valuables_tab.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\overlay\menu\tabs\items_tab.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\overlay\menu\tabs\level_tab.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\overlay\menu\tabs\misc_tab.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\overlay\menu\tabs\settings_tab.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\overlay\overlay.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\overlay\menu\tabs\cosmetic_tabs.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\haxsdk\unity\modules\hax_unity_ai.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\haxsdk\unity\modules\hax_unity_core.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\haxsdk\unity\modules\hax_unity_mscorlib.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\haxsdk\unity\modules\hax_unity_photon.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\haxsdk\unity\modules\hax_unity_physics.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\haxsdk\unity\modules\hax_unity_physics2d.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\haxsdk\unity\hax_unity.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="third_party\haxsdk\gui\hax_gui.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\haxsdk\gui\hax_gui_dx11.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\haxsdk\hax.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\haxsdk\unity\hax_unity.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\safetyhook\safetyhook.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\safetyhook\Zydis.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\resource.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\cheat.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pch.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\overlay\menu\localization.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game_classes.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\overlay\esp\esp.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\overlay\menu\widgets.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\overlay\menu\menu.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\overlay\overlay.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\overlay\menu\tabs\tabs.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\haxsdk\unity\modules\hax_unity_ai.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\haxsdk\unity\modules\hax_unity_core.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\haxsdk\unity\modules\hax_unity_mscorlib.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\haxsdk\unity\modules\hax_unity_photon.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\haxsdk\unity\modules\hax_unity_physics.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\haxsdk\unity\modules\hax_unity_physics2d.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\fonts\Icons.woff2" />
+    <None Include="resources\fonts\NunitoSans_Bold.woff2" />
+    <None Include="resources\fonts\NunitoSans_ExtraBold.woff2" />
+    <None Include="resources\fonts\NunitoSans_SemiBold.woff2" />
+    <None Include="resources\bundles\haxsdkbundle" />
+    <None Include="resources\cursors\beam.cur">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+    <None Include="resources\cursors\dgn1.cur">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+    <None Include="resources\cursors\dgn2.cur">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+    <None Include="resources\cursors\horz.cur">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+    <None Include="resources\cursors\link.cur">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+    <None Include="resources\cursors\move.cur">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+    <None Include="resources\cursors\pointer.cur">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+    <None Include="resources\cursors\unavailable.cur">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+    <None Include="resources\cursors\vert.cur">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="RepoHax.rc">
+      <Filter>Файлы ресурсов</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\images\logo.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\images\Crouch_Rest_Upgrade.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\images\Extra_Jump_Upgrade.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\images\HealthLarge.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\images\HealthMedium.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\images\HealthSmall.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\images\QMark.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\images\Range_Upgrade.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\images\Sprint_Speed_Upgrade.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\images\Stamina_Upgrade.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\images\Strength_Upgrade.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\images\Tumble_Launch_Upgrade.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\images\Tumble_Wings_Upgrade.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\images\Upgrade_Health_Albedo.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\images\Upgrade_Map-Player-Count_Albedo.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
