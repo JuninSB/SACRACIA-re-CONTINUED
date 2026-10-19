@@ -17,6 +17,21 @@ This project continues development independently from [Sacracia/RepoHax](https:/
 
 ---
 
+### O que mudou desde o RepoHax para REPO v0.4.4.3
+
+A referência é o [RepoHax v1.3.3 para REPO v0.4.4.3](https://github.com/Sacracia/RepoHax/releases/tag/v1.3.3). Esta continuação acrescenta os recursos abaixo; algumas ações continuam limitadas ao host.
+
+- **Grab:** Grab Assist com raio configurável, Grab Through, WallGrab, Anti Music Box Spin e Anti Duck. O Anti Duck tenta bloquear grabs acidentais, mas não reconhece todos os colliders.
+- **Identity:** aplicar nome personalizado, gerar nome aleatório em português, criar avatar aleatório e redefinir a identidade.
+- **Manage Enemies:** selecionar inimigos vivos e usar Kill, Bring, Heal, Set 1 HP, AI Disable/Enable e Aggro Monster. No multiplayer, a disponibilidade e o alvo dependem de ser host ou cliente.
+- **Items e Valuables:** inventário na loja, lista de itens do chão que podem ser guardados, spawner de valuables e dinheiro com valor configurável, além do filtro para ocultar valuables já colocados no carrinho ou na extração.
+- **Runtime:** status e nível/mapa atuais, contagem de valuables e itens no chão, inimigos por tier, vida dos jogadores, valores no carrinho/extração/mapa e bateria do caminhão.
+- **Performance:** opções para reduzir sombras, antialiasing, luzes de pixel, fog, partículas suaves, vegetação, reflexos e pós-processamento; contador de FPS e captura de benchmark para arquivos CSV.
+- **Settings e interface:** português, restauração das configurações, opção para ocultar controles exclusivos do host, taxa do ESP configurável e atualização sincronizada por frames; abas e painéis com rolagem.
+
+A [release 0.4.5.3](https://github.com/JuninSB/SACRACIA-re-CONTINUED/releases/tag/v0.4.5.3) inclui o binário correspondente a esta versão.
+
+---
 ### Features
 
 **Health**
